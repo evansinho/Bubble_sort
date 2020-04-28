@@ -3,12 +3,12 @@ def bubble_sort(array)
   sorted = true
   while sorted
     sorted = false
-    (0...array.length-1).each do |i| 
+    (0...array.length - 1).each do |i|
       if array[i] > array[i + 1]
         array[i], array[i + 1] = array[i + 1], array[i]
         sorted = true
       end
-    end  
+    end
   end
   array
 end
@@ -18,16 +18,13 @@ def bubble_sort_by(array)
   sorted = true
   while sorted
     sorted = false
-    (0...array.length-1).each do |i| 
-      if yield(array[i], array[i + 1]) > 0
+    (0...array.length - 1).each do |i|
+      if yield(array[i], array[i + 1]).positive?
         array[i], array[i + 1] = array[i + 1], array[i]
         sorted = true
       end
-    end  
+    end
   end
   array
 end
-sorted_array = bubble_sort_by(["hi","hi","hello","hey"]) do |left,right|
-  left.length - right.length
-end
-p sorted_array
+p bubble_sort_by(%w[hi hello hey]) { |left, right| left.length - right.length }
